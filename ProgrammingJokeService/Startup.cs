@@ -10,7 +10,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-
+using ProgrammingJokeService.Models;
+using Microsoft.EntityFrameworkCore;
 namespace ProgrammingJokeService
 {
     public class Startup
@@ -25,6 +26,8 @@ namespace ProgrammingJokeService
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<JokeDBContext>(opt =>
+                opt.UseInMemoryDatabase("JokeDbContext"));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
