@@ -26,8 +26,11 @@ namespace ProgrammingJokeService
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<JokeDBContext>(opt =>
-                opt.UseInMemoryDatabase("JokeDbContext"));
+            string dbCon = Configuration.GetConnectionString("JokeDb");
+            services.AddDbContext<Models.JokeDBContext>(options =>
+                options.UseSqlServer(dbCon));
+
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
